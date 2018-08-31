@@ -142,6 +142,8 @@ public class PPChessBoard extends ChessBoard{
             mb.getstart().setText("开始游戏");
             mb.getstart().setEnabled(true);
             result=Chess.WHITE;
+            ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
+            cam.snapShot();
             JOptionPane.showMessageDialog(mb,"恭喜！白棋获胜");
             logger.info("白棋获胜！初始化页面");
             setClickable(PPMainBoard.CAN_NOT_CLICK_INFO);
@@ -162,7 +164,13 @@ public class PPChessBoard extends ChessBoard{
             mb.getstart().setEnabled(true);
             result=Chess.BLACK;
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
+            //获胜的时候屏幕截图，分享棋盘
+            ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
+            cam.snapShot();
             JOptionPane.showMessageDialog(mb,"恭喜！黑棋获胜");
+            //调用邮箱分享
+            EmailHelper emailHelper = new EmailHelper();
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "五子棋对战中取得胜利！！！");
             logger.info("黑棋获胜！初始化页面");
             //初始化页面
             initArray();

@@ -2,6 +2,7 @@ package com.fivechess.view;
 
 import com.fivechess.judge.*;
 import com.fivechess.model.*;
+import com.fivechess.net.EmailHelper;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -82,6 +83,10 @@ public class PCChessBoard extends ChessBoard{
             mb.getstart().setEnabled(true);
             mb.getSituation1().setText("    状态:");
             mb.getSituation2().setText("    状态:");
+            ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
+            cam.snapShot();
+            EmailHelper emailHelper = new EmailHelper();
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "五子棋对战中取得胜利！！！");
             JOptionPane.showMessageDialog(mb,"恭喜！白棋获胜");
             logger1.info("白棋获胜！初始化棋盘页面");
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
@@ -103,6 +108,10 @@ public class PCChessBoard extends ChessBoard{
             mb.getstart().setEnabled(true);
             mb.getSituation1().setText("    状态:");
             mb.getSituation2().setText("    状态:");
+            ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
+            cam.snapShot();
+            EmailHelper emailHelper = new EmailHelper();
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "五子棋对战中取得胜利！！！");
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
             JOptionPane.showMessageDialog(mb,"恭喜！黑棋获胜");
             logger1.info("黑棋获胜！初始化棋盘页面");

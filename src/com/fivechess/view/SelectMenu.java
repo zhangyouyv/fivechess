@@ -1,9 +1,14 @@
 package com.fivechess.view;
 
+
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileInputStream;
+import java.net.URL;
 
 import javax.naming.InitialContext;
 import javax.swing.ImageIcon;
@@ -12,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
+import sun.audio.*;
 
 /**
  * 登录页面
@@ -33,6 +39,7 @@ public class SelectMenu extends JFrame implements MouseListener{
 		paintBg(); //页面
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addMouseListener(this);
+		
 	}
 	
 	/**
@@ -47,10 +54,7 @@ public class SelectMenu extends JFrame implements MouseListener{
         this.getLayeredPane().add(la, new Integer(Integer.MAX_VALUE)); //将JLabel加入到面板容器的最上层
 	}
 	
-	/**
-	 * 点击页面触发事件
-	 * @param e 
-	 */
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -66,6 +70,17 @@ public class SelectMenu extends JFrame implements MouseListener{
 			dispose();
 			logger.info("用户选择人机对战页面");
 			new ChooseLevel();
+		}
+		//点击加载声音
+		if(x>=70 && x<=200 && y>=383&& y<=500)
+		{
+			// 用户选择添加背景音乐
+			logger.info("用户选择添加背景音乐");
+			//模拟循环播放
+			
+				playMusic();
+			
+		
 		}
 		else if(x>=70 && x<=255 && y>=125 && y<=172)
 		{
@@ -102,4 +117,21 @@ public class SelectMenu extends JFrame implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	@SuppressWarnings("restriction")
+	public void playMusic()
+	{
+		try {
+			/*FileInputStream fileau=new FileInputStream("E:/git/FiveChess/src/com/fivechess/music/music.wav" );
+			@SuppressWarnings("restriction")
+			AudioStream as=new AudioStream(fileau);
+			AudioPlayer.player.start(as);*/
+			//循环播放音乐
+			URL url = new URL("http://fjdx.sc.chinaz.com/files/download/sound1/201202/667.wav");
+			AudioClip player = Applet.newAudioClip(url);
+			player.loop();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 }

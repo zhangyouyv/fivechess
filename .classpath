@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="D:/Apache/apache-maven-3.5.4-bin/maven-repository/javax/mail/mail/1.4.5/mail-1.4.5.jar" sourcepath="D:/Apache/apache-maven-3.5.4-bin/maven-repository/javax/mail/mail/1.4.5/mail-1.4.5-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Apache/apache-maven-3.5.4-bin/maven-repository/javax/activation/activation/1.1/activation-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
