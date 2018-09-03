@@ -3,6 +3,9 @@ package com.fivechess.view;
 import com.fivechess.judge.*;
 import com.fivechess.model.*;
 import com.fivechess.net.*;
+
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 
 import org.apache.log4j.Logger;
@@ -144,6 +147,9 @@ public class PPChessBoard extends ChessBoard{
             result=Chess.WHITE;
             ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
             cam.snapShot();
+            EmailHelper emailHelper = new EmailHelper();
+            Session session = emailHelper.getSession();
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='d:\\Hello1'>");
             JOptionPane.showMessageDialog(mb,"恭喜！白棋获胜");
             logger.info("白棋获胜！初始化页面");
             setClickable(PPMainBoard.CAN_NOT_CLICK_INFO);
@@ -170,7 +176,8 @@ public class PPChessBoard extends ChessBoard{
             JOptionPane.showMessageDialog(mb,"恭喜！黑棋获胜");
             //调用邮箱分享
             EmailHelper emailHelper = new EmailHelper();
-            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "五子棋对战中取得胜利！！！");
+            Session session = emailHelper.getSession();
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='d:\\Hello1'>");
             logger.info("黑棋获胜！初始化页面");
             //初始化页面
             initArray();

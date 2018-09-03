@@ -20,6 +20,7 @@ public class NetTool {
 	public static void sendUDPBroadCast(String ip,String msg)
 	{
 		try {
+			//套接字发送数据包
 			DatagramSocket ds = new DatagramSocket();
 			InetAddress ia=InetAddress.getByName(ip);
 			DatagramPacket dp=new DatagramPacket(msg.getBytes(),0,msg.getBytes().length,ia,10086);

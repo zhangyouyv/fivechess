@@ -4,6 +4,9 @@ import com.fivechess.judge.*;
 import com.fivechess.model.*;
 import com.fivechess.net.EmailHelper;
 
+import javax.imageio.ImageIO;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -13,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 /**
  * 加载人机棋盘
@@ -85,8 +89,10 @@ public class PCChessBoard extends ChessBoard{
             mb.getSituation2().setText("    状态:");
             ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
             cam.snapShot();
+            //获取获胜棋盘的截图，和获胜的IP地址
             EmailHelper emailHelper = new EmailHelper();
-            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "五子棋对战中取得胜利！！！");
+            Session session = emailHelper.getSession();
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='d:\\Hello1' />");
             JOptionPane.showMessageDialog(mb,"恭喜！白棋获胜");
             logger1.info("白棋获胜！初始化棋盘页面");
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
@@ -108,10 +114,13 @@ public class PCChessBoard extends ChessBoard{
             mb.getstart().setEnabled(true);
             mb.getSituation1().setText("    状态:");
             mb.getSituation2().setText("    状态:");
+            //获取系统当前时间，拼接到路径文件中
+            Long timenow = System.currentTimeMillis();
             ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
             cam.snapShot();
             EmailHelper emailHelper = new EmailHelper();
-            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "五子棋对战中取得胜利！！！");
+            
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='d:\\Hello1'>");
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
             JOptionPane.showMessageDialog(mb,"恭喜！黑棋获胜");
             logger1.info("黑棋获胜！初始化棋盘页面");
