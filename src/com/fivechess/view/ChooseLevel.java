@@ -40,7 +40,7 @@ public class ChooseLevel extends JFrame implements MouseListener{
 	 */
 	private void paintBg() {
 		// TODO Auto-generated method stub
-		ImageIcon image = new ImageIcon("images/level.jpg");
+		ImageIcon image = new ImageIcon("./FiveChess/images/level.jpg");
 		image.setImage(image.getImage().getScaledInstance(290, 420, Image.SCALE_DEFAULT));
         JLabel la = new JLabel(image);
         la.setBounds(0, 0, this.getWidth(), this.getHeight());//添加图片，设置图片大小为窗口的大小。

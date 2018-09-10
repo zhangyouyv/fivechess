@@ -8,7 +8,13 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.Random;
+import java.util.Scanner;
 
 import javax.naming.InitialContext;
 import javax.swing.Icon;
@@ -21,7 +27,10 @@ import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
 
+import com.fivechess.net.Client;
 import com.fivechess.net.EmailHelper;
+import com.fivechess.net.Match;
+import com.fivechess.net.NetTool;
 
 import sun.audio.*;
 
@@ -54,7 +63,7 @@ public class SelectMenu extends JFrame implements MouseListener{
 	 */
 	private void paintBg() {
 		// TODO Auto-generated method stub
-		ImageIcon image = new ImageIcon("images/main.jpg");
+		ImageIcon image = new ImageIcon("./FiveChess/images/main.jpg");
 		image.setImage(image.getImage().getScaledInstance(290, 420, Image.SCALE_DEFAULT));
         JLabel la = new JLabel(image);
         la.setBounds(0, 0, this.getWidth(), this.getHeight());//添加图片，设置图片大小为窗口的大小。
@@ -83,10 +92,7 @@ public class SelectMenu extends JFrame implements MouseListener{
 			// 用户选择添加背景音乐
 			logger.info("用户选择添加背景音乐");
 			//模拟循环播放
-			
 				playMusic();
-			
-		
 		}
 		else if(x>=70 && x<=255 && y>=125 && y<=172)
 		{
@@ -94,6 +100,66 @@ public class SelectMenu extends JFrame implements MouseListener{
 			dispose();
 			logger.info("用户选择人人对战页面");
 			new PPMainBoard();
+		}
+		else if(x>=70 && x<=255 && y>=180 && y<=230)
+		{
+			//加载人人对战页面
+			
+			logger.info("用户选择比赛对战页面");
+			JOptionPane.showConfirmDialog(talkArea, "比赛功能还在设计中，敬请期待！");
+		}
+		//点击进入自建桌页面
+		else if(x>=70 && x<=255 && y>=250 && y<=300)
+		{
+			logger.info("用户选择自建桌面对战页面");
+			Match match = new Match();
+			Integer housenumber = match.getHouseNumber();
+			//创建一个选择框，是选择自己创建房间或者输入邀请码加入房间
+			Object[] obj2 ={ "创建房间", "输入邀请码进入房间"};  
+			String s = (String) JOptionPane.showInputDialog(null,"请选择类型:\n", "创建房间或者进入房间", JOptionPane.PLAIN_MESSAGE, new ImageIcon("icon.png"), obj2, "足球");
+			if(s.equals("创建房间")){
+				dispose();
+				int s1 = JOptionPane.showConfirmDialog(talkArea,"请联系你的朋友让他输入房间号！"+housenumber);
+				if(s1 == 0){
+					new PPMainBoardforNu();
+				
+				}else{
+					new SelectMenu();
+				}
+				
+				//把房间号发送到服务器
+				try {
+					Socket socket1 = new Socket("192.168.1.38",8089);
+					//启动一条线程
+					new Thread(){
+						public void run(){
+							OutputStream os= null;
+				            try {
+				                os= socket1.getOutputStream();
+				                Integer in=housenumber;
+				                String ins = "o"+housenumber+" ";
+				                os.write((""+ins).getBytes());
+				                os.flush();
+				            } catch (IOException e) {
+				                e.printStackTrace();
+				            }
+						}
+						}.start();
+						
+		               
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			else{
+				new PPMainBoardforNu();
+			}
+			
 		}
 		else if(x>=7 && x<=40 && y>=200&& y<=250)
 		{
@@ -112,7 +178,7 @@ public class SelectMenu extends JFrame implements MouseListener{
 			logger.info("用户触发广告！！！");
 			//弹窗
 			//声明一个图标
-			ImageIcon icon = new ImageIcon("images/ad.gif");
+			ImageIcon icon = new ImageIcon("./FiveChess/images/ad.gif");
 			 JOptionPane.showMessageDialog(talkArea, null, "广告", 1, icon);
 		}
 		else if(x>=7 && x<=40 && y>=83&& y<=107)

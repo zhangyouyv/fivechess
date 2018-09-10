@@ -22,6 +22,7 @@ public class PPChessBoard extends ChessBoard{
     private int role; //角色
     private JTextArea talkArea; //交流信息
     private PPMainBoard mb;
+    private PPMainBoard mbn;
     private int step[][]=new int[30*30][2];//定义储存步数数组
     private int stepCount=0;//初始化数组
     //加载黑白棋子，用于判定玩家所执棋
@@ -37,6 +38,12 @@ public class PPChessBoard extends ChessBoard{
         this.mb=mb;
         //设置先开始游戏的玩家执白
         setRole(Chess.WHITE);
+    }
+    public PPChessBoard(PPMainBoardforNu mb) {
+        super();
+        this.mb=mbn;
+        //设置先开始游戏的玩家执白
+        setRole(Chess.BLACK);
     }
     /**
      * 设置聊天窗口

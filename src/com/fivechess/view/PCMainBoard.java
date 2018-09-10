@@ -102,7 +102,7 @@ public class PCMainBoard extends MainBoard{
         situation2.setBackground(new Color(82,109,165));
         situation2.setBounds(10,520,200,50);
         situation2.setFont(new Font("宋体", Font.BOLD, 20));
- 	    image1 = Toolkit.getDefaultToolkit().getImage("images/black.png");//添加黑棋图片
+ 	    image1 = Toolkit.getDefaultToolkit().getImage("./FiveChess/images/black.png");//添加黑棋图片
  	    jLabel1 = new JLabel();
  	    add(jLabel1); 
 		imageIcon1 = new ImageIcon(image1);
@@ -110,7 +110,7 @@ public class PCMainBoard extends MainBoard{
 		
 		setVisible(true);
 		jLabel1.setBounds(130,75,200,50);
- 	    image2= Toolkit.getDefaultToolkit().getImage("images/white.png");//添加白棋图片
+ 	    image2= Toolkit.getDefaultToolkit().getImage("./FiveChess/images/white.png");//添加白棋图片
  	    jLabel2 = new JLabel();
 		imageIcon2 = new ImageIcon(image2);
 		jLabel2.setIcon(imageIcon2);

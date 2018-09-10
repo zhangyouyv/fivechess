@@ -47,10 +47,10 @@ public class ChessBoard extends JPanel implements MouseMotionListener,MouseListe
 
     ChessBoard() {
     	//加载棋盘、黑棋、白棋、位置图片
-        chessBoardImage = Toolkit.getDefaultToolkit().getImage("images/chessBoard.jpg");
-        whiteChess = Toolkit.getDefaultToolkit().getImage("images/white.png");
-        blackChess=Toolkit.getDefaultToolkit().getImage("images/black.png");
-        position=Toolkit.getDefaultToolkit().getImage("images/position.gif");
+        chessBoardImage = Toolkit.getDefaultToolkit().getImage("./FiveChess/images/chessBoard.jpg");
+        whiteChess = Toolkit.getDefaultToolkit().getImage("./FiveChess/images/white.png");
+        blackChess=Toolkit.getDefaultToolkit().getImage("./FiveChess/images/black.png");
+        position=Toolkit.getDefaultToolkit().getImage("./FiveChess/images/position.gif");
         initArray();
         addMouseListener(this);
         addMouseMotionListener(this);
