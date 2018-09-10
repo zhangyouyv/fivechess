@@ -87,12 +87,12 @@ public class PCChessBoard extends ChessBoard{
             mb.getstart().setEnabled(true);
             mb.getSituation1().setText("    状态:");
             mb.getSituation2().setText("    状态:");
-            ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
+            ScreenShoot cam= new ScreenShoot("c:\\Hello", "png");
             cam.snapShot();
             //获取获胜棋盘的截图，和获胜的IP地址
             EmailHelper emailHelper = new EmailHelper();
             Session session = emailHelper.getSession();
-            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='d:\\Hello1' />");
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='c:\\Hello1' />");
             JOptionPane.showMessageDialog(mb,"恭喜！白棋获胜");
             logger1.info("白棋获胜！初始化棋盘页面");
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
@@ -116,11 +116,11 @@ public class PCChessBoard extends ChessBoard{
             mb.getSituation2().setText("    状态:");
             //获取系统当前时间，拼接到路径文件中
             Long timenow = System.currentTimeMillis();
-            ScreenShoot cam= new ScreenShoot("d:\\Hello", "png");
+            ScreenShoot cam= new ScreenShoot("c:\\Hello", "png");
             cam.snapShot();
             EmailHelper emailHelper = new EmailHelper();
             
-            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='d:\\Hello1'>");
+            emailHelper.sendEmail("514306210@qq.com", "五子棋胜利分享", "<img src='c:\\Hello1'>");
             setClickable(MainBoard.CAN_NOT_CLICK_INFO);
             JOptionPane.showMessageDialog(mb,"恭喜！黑棋获胜");
             logger1.info("黑棋获胜！初始化棋盘页面");
