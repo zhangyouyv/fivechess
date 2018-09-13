@@ -81,7 +81,7 @@ public class PPChessBoardforNu extends ChessBoard{
 	              bos.write(buffer, 0, length);//写入输出流  
 	          }  
 	          mString.close();//读取完毕，关闭输入流  
-	            System.out.println("..........................................");
+	            System.out.println("...............***********..............");
 	          // 根据得到流创建字符串对象  
 	         str = new String(bos.toByteArray(), "UTF-8");
 	         //房主的ip为：
@@ -99,10 +99,6 @@ public class PPChessBoardforNu extends ChessBoard{
 					e1.printStackTrace();
 				}  
                 String local=addr.getHostAddress().toString(); 
-                if(local.equals(owner2)){
-                	mb.getstart().setEnabled(false);
-                	mb.getTf_number().setEditable(false);
-                }
 	        }
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block

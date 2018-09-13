@@ -2,6 +2,7 @@ package com.fivechess.view;
 
 
 import java.applet.Applet;
+import java.net.MalformedURLException; 
 import java.applet.AudioClip;
 import java.awt.Image;
 import java.awt.Point;
@@ -10,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -31,6 +33,7 @@ import com.fivechess.net.Client;
 import com.fivechess.net.EmailHelper;
 import com.fivechess.net.Match;
 import com.fivechess.net.NetTool;
+import com.fivechess.net.Server;
 
 import sun.audio.*;
 
@@ -64,6 +67,7 @@ public class SelectMenu extends JFrame implements MouseListener{
 	private void paintBg() {
 		// TODO Auto-generated method stub
 		ImageIcon image = new ImageIcon("./FiveChess/images/main.jpg");
+		//ImageIcon image = new ImageIcon("images/main.jpg");
 		image.setImage(image.getImage().getScaledInstance(290, 420, Image.SCALE_DEFAULT));
         JLabel la = new JLabel(image);
         la.setBounds(0, 0, this.getWidth(), this.getHeight());//添加图片，设置图片大小为窗口的大小。
@@ -94,6 +98,14 @@ public class SelectMenu extends JFrame implements MouseListener{
 			//模拟循环播放
 				playMusic();
 		}
+		//点击加载声音
+				if(x>=201 && x<=400 && y>=383&& y<=500)
+				{
+					// 用户选择添加背景音乐
+					logger.info("用户选择关闭背景音乐");
+					//模拟循环播放
+						stopMusic();
+				}
 		else if(x>=70 && x<=255 && y>=125 && y<=172)
 		{
 			//加载人人对战页面
@@ -121,23 +133,25 @@ public class SelectMenu extends JFrame implements MouseListener{
 				dispose();
 				int s1 = JOptionPane.showConfirmDialog(talkArea,"请联系你的朋友让他输入房间号！"+housenumber);
 				if(s1 == 0){
-					new PPMainBoardforNu();
-				
+					new PPMainBoardforNu(2);
+					
 				}else{
 					new SelectMenu();
 				}
 				
 				//把房间号发送到服务器
 				try {
-					Socket socket1 = new Socket("192.168.1.38",8089);
+					
+					Socket socket1 = new Socket("192.168.1.62",8089);
 					//启动一条线程
 					new Thread(){
 						public void run(){
 							OutputStream os= null;
 				            try {
 				                os= socket1.getOutputStream();
+				                String ip = InetAddress.getLocalHost().getHostAddress();
 				                Integer in=housenumber;
-				                String ins = "o"+housenumber+" ";
+				                String ins = "o"+housenumber+" "+"i"+ip+"!";
 				                os.write((""+ins).getBytes());
 				                os.flush();
 				            } catch (IOException e) {
@@ -157,7 +171,9 @@ public class SelectMenu extends JFrame implements MouseListener{
 				
 			}
 			else{
-				new PPMainBoardforNu();
+				new PPMainBoardforNu(1);
+				
+				
 			}
 			
 		}
@@ -207,17 +223,23 @@ public class SelectMenu extends JFrame implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 	}
 	@SuppressWarnings("restriction")
+	
+	AudioClip player;
 	public void playMusic()
 	{
 		try {
-			/*FileInputStream fileau=new FileInputStream("E:/git/FiveChess/src/com/fivechess/music/music.wav" );
-			@SuppressWarnings("restriction")
-			AudioStream as=new AudioStream(fileau);
-			AudioPlayer.player.start(as);*/
-			//循环播放音乐
 			URL url = new URL("http://fjdx.sc.chinaz.com/files/download/sound1/201202/667.wav");
-			AudioClip player = Applet.newAudioClip(url);
+			player = Applet.newAudioClip(url);
 			player.loop();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void stopMusic()
+	{
+		try {
+			player.stop();
 		}catch (Exception e){
 			e.printStackTrace();
 		}

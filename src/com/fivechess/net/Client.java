@@ -76,7 +76,7 @@ public class Client extends Thread {
 	    //函数入口
 	    public static void main(String[] args) {
 	        //需要服务器的正确的IP地址和端口号
-	        Client clientTest=new Client("192.168.1.38", 8089);
+	        Client clientTest=new Client("192.168.1.68", 8089);
 	        clientTest.start();
 	    }
 
